@@ -1,0 +1,132 @@
+/* ============================================================
+   ZANSTDO - responsive.css
+   Media query untuk HP & tablet (desktop-first)
+   ============================================================ */
+
+/* ---------- Tablet (≤ 992px) ---------- */
+@media (max-width: 992px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .masonry {
+    columns: 2;
+  }
+
+  .grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-side {
+    position: static;
+    height: auto;
+  }
+}
+
+/* ---------- HP (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-md);
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .nav-menu a {
+    padding: 12px 14px;
+  }
+
+  .cart-link {
+    margin-left: auto;
+  }
+
+  .hero {
+    min-height: 72vh;
+  }
+
+  .print-banner {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- HP kecil (≤ 576px) ---------- */
+@media (max-width: 576px) {
+  section {
+    padding: 48px 0;
+  }
+
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .masonry {
+    columns: 1;
+  }
+
+  .filter-bar {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    padding: 22px 18px;
+  }
+
+  .detail-list .detail-row {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-list .detail-value {
+    text-align: left;
+  }
+}

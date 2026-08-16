@@ -1,0 +1,15 @@
+# Sistem
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Log & cache
+*.log
+*.tmp
+
+# Output build (tidak dipakai di proyek ini)
+dist/
+build/

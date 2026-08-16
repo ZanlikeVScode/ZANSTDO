@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keranjang — ZANSTDO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/responsive.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">ZANSTDO<span>Studio Lensa Belajar</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+    <nav class="nav-menu" id="navMenu">
+      <a href="../index.html" data-nav="home">Home</a>
+      <a href="../portfolio/" data-nav="portfolio">Portfolio</a>
+      <a href="../services/" data-nav="services">Services</a>
+      <a href="../booking/" data-nav="booking">Booking</a>
+      <a href="../store/" data-nav="store">Store</a>
+      <a href="../gallery/?id=wedding-andi-sari" data-nav="gallery">Gallery</a>
+    </nav>
+    <a class="cart-link" href="index.html" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></a>
+  </div>
+</header>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Cart</span>
+    <h1>Keranjang Belanja</h1>
+    <p>Periksa kembali pesananmu sebelum menuju checkout.</p>
+  </div>
+</section>
+
+<!-- Cart -->
+<section style="padding-top: 8px; padding-bottom: 72px;">
+  <div class="container">
+
+    <div id="cartEmpty" style="display: none;"></div>
+
+    <div class="grid grid-2" id="cartSummary" style="display: none; grid-template-columns: 2fr 1fr; align-items: start;">
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Produk</th>
+              <th>Harga</th>
+              <th>Qty</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cartBody"></tbody>
+        </table>
+      </div>
+
+      <div class="summary-box">
+        <h3>Ringkasan</h3>
+        <div class="summary-row">
+          <span>Total</span>
+          <span id="cartTotal">Rp0</span>
+        </div>
+        <div class="summary-total">
+          <span>Total Bayar</span>
+          <span id="cartTotal2">Rp0</span>
+        </div>
+        <a href="../checkout/" class="btn btn-gold" style="width: 100%; margin-top: 18px;">Lanjut ke Checkout</a>
+        <a href="../store/" class="btn btn-outline" style="width: 100%; margin-top: 10px;">Tambah Produk</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>ZANSTDO</h4>
+        <p>Studio Lensa Belajar — website pembelajaran web programming (HTML, CSS, JavaScript) dengan simulasi studio fotografi all-in-one.</p>
+      </div>
+      <div>
+        <h4>Menu</h4>
+        <a href="../portfolio/">Portfolio</a>
+        <a href="../services/">Services</a>
+        <a href="../booking/">Booking</a>
+        <a href="../store/">Store</a>
+      </div>
+      <div>
+        <h4>Lainnya</h4>
+        <a href="../gallery/?id=wedding-andi-sari">Contoh Galeri Klien</a>
+        <a href="../custom-package/">Request Custom</a>
+        <a href="../admin/">Admin (tanpa login)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear">2026</span> ZANSTDO — Studio Lensa Belajar</span>
+      <span>Dibuat untuk pembelajaran web programming</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../JAVASCRIPT/storage.js"></script>
+<script src="../JAVASCRIPT/data.js"></script>
+<script src="../JAVASCRIPT/app.js"></script>
+<script src="../JAVASCRIPT/store.js"></script>
+<script>
+  document.getElementById("footerYear").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

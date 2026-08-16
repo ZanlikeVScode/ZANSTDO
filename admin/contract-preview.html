@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontrak Preview — Admin ZANSTDO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/responsive.css">
+<link rel="stylesheet" href="../CSS/admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-side">
+    <div class="admin-brand">ZANSTDO<span>Studio Manager</span></div>
+    <nav class="admin-nav">
+      <a href="index.html">📊 Dashboard</a>
+      <a href="bookings.html">📋 Bookings</a>
+      <a href="gallery.html">🖼️ Galeri & Favorit</a>
+      <a href="orders.html">🛍️ Pesanan</a>
+    </nav>
+    <div class="admin-foot">
+      <a href="../index.html">← Lihat Website</a>
+    </div>
+  </aside>
+
+  <!-- Konten -->
+  <main class="admin-main">
+    <div class="admin-topbar no-print">
+      <div>
+        <h1>Kontrak Digital</h1>
+        <p>Simulasi penandatanganan kontrak kerja sama jasa fotografi.</p>
+      </div>
+      <button class="btn btn-gold btn-sm no-print" data-window-print>🖨️ Cetak Kontrak</button>
+    </div>
+
+    <div class="contract" id="contractPanel">
+      <h2>Kontrak Kerja Sama Jasa Fotografi</h2>
+      <p class="contract-sub">ZANSTDO — Studio Lensa Belajar (dokumen simulasi untuk pembelajaran)</p>
+
+      <p class="contract-clause">
+        Perjanjian ini dibuat antara <strong>ZANSTDO Studio</strong> (fotografer) dan
+        <strong id="contractClient">Klien</strong> (klien) untuk sesi pemotretan yang akan dilaksanakan pada
+        <strong id="contractDate">-</strong> dengan paket <strong id="contractPackage">-</strong>.
+      </p>
+
+      <ol>
+        <li>Fotografer menyediakan jasa pemotretan sesuai paket yang dipilih klien.</li>
+        <li>Klien membayar sesuai kesepakatan dan batas waktu yang ditentukan.</li>
+        <li>Foto hasil pemotretan menjadi milik klien setelah pembayaran lunas.</li>
+        <li>Fotografer berhak menggunakan foto sebagai portofolio (dengan sepengetahuan klien).</li>
+        <li>Pembatalan di luar ketentuan dikenakan biaya sesuai kebijakan studio.</li>
+      </ol>
+
+      <div class="contract-clause">
+        <label for="signatureName" style="font-weight: 600;">Nama Tanda Tangan (simulasi)</label>
+        <input class="input" type="text" id="signatureName" placeholder="Ketik nama sebagai tanda tangan" style="margin-top: 6px;">
+      </div>
+
+      <div class="sign-area">
+        <div class="sign-box">
+          <div class="signature" id="signaturePreview">—</div>
+          <div class="muted-text small" id="signatureClientLabel">Nama Klien</div>
+        </div>
+        <div class="sign-box">
+          <div class="signature">ZANSTDO Studio</div>
+          <div class="muted-text small">Fotografer</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="../JAVASCRIPT/storage.js"></script>
+<script src="../JAVASCRIPT/data.js"></script>
+<script src="../JAVASCRIPT/app.js"></script>
+<script src="../JAVASCRIPT/admin.js"></script>
+</body>
+</html>

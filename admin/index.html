@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — ZANSTDO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/responsive.css">
+<link rel="stylesheet" href="../CSS/admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-side">
+    <div class="admin-brand">ZANSTDO<span>Studio Manager</span></div>
+    <nav class="admin-nav">
+      <a href="index.html" class="active">📊 Dashboard</a>
+      <a href="bookings.html">📋 Bookings</a>
+      <a href="gallery.html">🖼️ Galeri & Favorit</a>
+      <a href="orders.html">🛍️ Pesanan</a>
+    </nav>
+    <div class="admin-foot">
+      <a href="../index.html">← Lihat Website</a>
+    </div>
+  </aside>
+
+  <!-- Konten -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <h1>Dashboard</h1>
+        <p>Ringkasan aktivitas studio (mode admin tanpa login).</p>
+      </div>
+    </div>
+
+    <!-- Statistik -->
+    <div class="stat-grid">
+      <div class="stat-card"><span class="stat-icon">📋</span><div class="num" id="statBookings">0</div><div class="lbl">Booking Jasa Foto</div></div>
+      <div class="stat-card"><span class="stat-icon">❤️</span><div class="num" id="statFavorites">0</div><div class="lbl">Foto Favorit Klien</div></div>
+      <div class="stat-card"><span class="stat-icon">🛍️</span><div class="num" id="statOrders">0</div><div class="lbl">Pesanan Toko</div></div>
+      <div class="stat-card"><span class="stat-icon">🤝</span><div class="num" id="statCustom">0</div><div class="lbl">Request Custom</div></div>
+    </div>
+
+    <!-- Daftar -->
+    <div class="grid grid-2" style="align-items: start;">
+      <div class="admin-section">
+        <h2>Booking Terbaru</h2>
+        <div id="latestBookings"></div>
+        <p style="margin-top: 12px;"><a class="link-gold" href="bookings.html">Kelola semua booking →</a></p>
+      </div>
+
+      <div class="admin-section">
+        <h2>Request Custom Terbaru</h2>
+        <div id="recentCustomRequests"></div>
+        <p class="muted-text small" style="margin-top: 12px;">Request tersebut muncul dari halaman "Request Custom" di website publik.</p>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="../JAVASCRIPT/storage.js"></script>
+<script src="../JAVASCRIPT/data.js"></script>
+<script src="../JAVASCRIPT/app.js"></script>
+<script src="../JAVASCRIPT/admin.js"></script>
+</body>
+</html>

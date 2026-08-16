@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri & Favorit — Admin ZANSTDO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/responsive.css">
+<link rel="stylesheet" href="../CSS/admin.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-side">
+    <div class="admin-brand">ZANSTDO<span>Studio Manager</span></div>
+    <nav class="admin-nav">
+      <a href="index.html">📊 Dashboard</a>
+      <a href="bookings.html">📋 Bookings</a>
+      <a href="gallery.html" class="active">🖼️ Galeri & Favorit</a>
+      <a href="orders.html">🛍️ Pesanan</a>
+    </nav>
+    <div class="admin-foot">
+      <a href="../index.html">← Lihat Website</a>
+    </div>
+  </aside>
+
+  <!-- Konten -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <h1>Galeri & Pilihan Klien</h1>
+        <p>Kelola foto dan lihat favorit serta komentar dari klien.</p>
+      </div>
+    </div>
+
+    <!-- Form tambah foto -->
+    <div class="admin-section">
+      <h2>✏️ Tambah Foto Baru (Preview via URL)</h2>
+      <form class="form-grid" id="addPhotoForm" novalidate>
+        <div class="form-group">
+          <label for="newPhotoUrl">URL Foto *</label>
+          <input class="input" type="url" id="newPhotoUrl" placeholder="https://picsum.photos/id/1035/600/400">
+          <div class="field-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="newPhotoTitle">Judul Foto *</label>
+          <input class="input" type="text" id="newPhotoTitle" placeholder="Mis. Sunrise Puncak">
+          <div class="field-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="newPhotoCategory">Kategori *</label>
+          <select class="input" id="newPhotoCategory">
+            <option value="">— Pilih —</option>
+            <option>Wedding</option>
+            <option>Prewedding</option>
+            <option>Event</option>
+            <option>Portrait</option>
+            <option>Nature</option>
+          </select>
+          <div class="field-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="newPhotoGallery">Galeri Klien</label>
+          <select class="input" id="newPhotoGallery">
+            <option value="wedding-andi-sari">Wedding Andi & Sari</option>
+            <option value="prewedding-raka-nia">Prewedding Raka & Nia</option>
+            <option value="graduation-sman1">Graduation SMAN 1 Bandung</option>
+            <option value="family-wijaya">Family Portrait Keluarga Wijaya</option>
+            <option value="nature-papandayan">Nature Adventure Papandayan</option>
+          </select>
+        </div>
+        <div style="grid-column: 1 / -1;">
+          <button type="submit" class="btn btn-gold btn-sm">Simpan Foto</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tabel foto -->
+    <div class="admin-section">
+      <h2>🗂️ Daftar Foto</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Judul</th>
+              <th>Galeri</th>
+              <th>Kategori</th>
+              <th style="text-align:center">Favorit</th>
+              <th style="text-align:center">Komentar</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="photoTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Favorit klien -->
+    <div class="admin-section">
+      <h2>❤️ Foto Favorit Klien</h2>
+      <div id="favoritesView"></div>
+    </div>
+
+    <!-- Komentar klien -->
+    <div class="admin-section">
+      <h2>💬 Komentar Klien</h2>
+      <div id="commentsView"></div>
+    </div>
+  </main>
+
+</div>
+
+<script src="../JAVASCRIPT/storage.js"></script>
+<script src="../JAVASCRIPT/data.js"></script>
+<script src="../JAVASCRIPT/app.js"></script>
+<script src="../JAVASCRIPT/admin.js"></script>
+</body>
+</html>

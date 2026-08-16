@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking — ZANSTDO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../CSS/style.css">
+<link rel="stylesheet" href="../CSS/responsive.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📸</text></svg>">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="container nav-inner">
+    <a class="brand" href="../index.html">ZANSTDO<span>Studio Lensa Belajar</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+    <nav class="nav-menu" id="navMenu">
+      <a href="../index.html" data-nav="home">Home</a>
+      <a href="../portfolio/" data-nav="portfolio">Portfolio</a>
+      <a href="../services/" data-nav="services">Services</a>
+      <a href="index.html" data-nav="booking">Booking</a>
+      <a href="../store/" data-nav="store">Store</a>
+      <a href="../gallery/?id=wedding-andi-sari" data-nav="gallery">Gallery</a>
+    </nav>
+    <a class="cart-link" href="../cart/" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></a>
+  </div>
+</header>
+
+<!-- Page hero -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Booking</span>
+    <h1>Form Pemesanan</h1>
+    <p>Isi data di bawah ini dengan lengkap. Data terkirim otomatis ke admin studio.</p>
+  </div>
+</section>
+
+<!-- Form -->
+<section style="padding-top: 8px;">
+  <div class="container-narrow">
+    <div class="notice" id="packageNotice"></div>
+
+    <form class="form-card" id="bookingForm" novalidate>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="bookingName">Nama Lengkap *</label>
+          <input class="input" type="text" id="bookingName" placeholder="Mis. Andi Pratama">
+          <div class="field-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingEmail">Email *</label>
+          <input class="input" type="email" id="bookingEmail" placeholder="andi@email.com">
+          <div class="field-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingPhone">Nomor WhatsApp *</label>
+          <input class="input" type="tel" id="bookingPhone" placeholder="081234567890">
+          <div class="field-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingDate">Tanggal Acara *</label>
+          <input class="input" type="date" id="bookingDate">
+          <div class="field-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingPackage">Paket *</label>
+          <select class="input" id="bookingPackage">
+            <option value="">— Pilih Paket —</option>
+          </select>
+          <div class="field-error"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingNotes">Catatan Tambahan</label>
+          <input class="input" type="text" id="bookingNotes" placeholder="Mis. acara dimulai jam 08.00">
+        </div>
+      </div>
+
+      <p class="muted-text small" style="margin-bottom: 16px;">
+        Butuh paket custom? <a class="link-gold" href="../custom-package/">Request custom di sini →</a>
+      </p>
+
+      <button type="submit" class="btn btn-gold">Kirim Booking</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>ZANSTDO</h4>
+        <p>Studio Lensa Belajar — website pembelajaran web programming (HTML, CSS, JavaScript) dengan simulasi studio fotografi all-in-one.</p>
+      </div>
+      <div>
+        <h4>Menu</h4>
+        <a href="../portfolio/">Portfolio</a>
+        <a href="../services/">Services</a>
+        <a href="../booking/">Booking</a>
+        <a href="../store/">Store</a>
+      </div>
+      <div>
+        <h4>Lainnya</h4>
+        <a href="../gallery/?id=wedding-andi-sari">Contoh Galeri Klien</a>
+        <a href="../custom-package/">Request Custom</a>
+        <a href="../admin/">Admin (tanpa login)</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="footerYear">2026</span> ZANSTDO — Studio Lensa Belajar</span>
+      <span>Dibuat untuk pembelajaran web programming</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../JAVASCRIPT/storage.js"></script>
+<script src="../JAVASCRIPT/data.js"></script>
+<script src="../JAVASCRIPT/app.js"></script>
+<script src="../JAVASCRIPT/booking.js"></script>
+<script>
+  document.getElementById("footerYear").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
