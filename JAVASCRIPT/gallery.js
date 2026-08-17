@@ -20,7 +20,7 @@ function getGalleryFromUrl() {
     if (root) {
       root.innerHTML =
         '<div class="empty"><div class="empty-icon">🔍</div>Galeri tidak ditemukan.<br><br>' +
-        '<a href="../index.html" class="btn btn-gold">Kembali ke Home</a></div>';
+        '<a href="index.html" class="btn btn-gold">Kembali ke Home</a></div>';
     }
     return null;
   }

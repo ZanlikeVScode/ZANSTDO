@@ -3,7 +3,7 @@
    Logika halaman booking, booking-success, dan custom-package
    ============================================================ */
 
-// ----- Halaman booking (/booking/index.html) -----
+// ----- Halaman booking (booking.html) -----
 function initBookingPage() {
   const select = document.getElementById("bookingPackage");
   if (!select) return;
@@ -112,12 +112,12 @@ if (bookingForm) {
     showToast("Booking berhasil dikirim!", "success");
 
     setTimeout(function () {
-      location.href = "booking-success/index.html?id=" + booking.id;
+      location.href = "booking-success.html?id=" + booking.id;
     }, 700);
   });
 }
 
-// ----- Halaman booking-success (/booking-success/index.html) -----
+// ----- Halaman booking-success (booking-success.html) -----
 function initBookingSuccessPage() {
   const panel = document.getElementById("successPanel");
   if (!panel) return;
@@ -128,7 +128,7 @@ function initBookingSuccessPage() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Data booking tidak ditemukan.<br><br>' +
-      '<a href="../booking/" class="btn btn-gold">Buat Booking Baru</a></div>';
+      '<a href="booking.html" class="btn btn-gold">Buat Booking Baru</a></div>';
     return;
   }
 
@@ -146,11 +146,11 @@ function initBookingSuccessPage() {
       : "") +
     '<div class="detail-row"><span class="detail-label">Status</span><span class="detail-value">' + statusBadge(booking.status) + "</span></div>" +
     "</div>" +
-    '<a href="../index.html" class="btn btn-gold">Kembali ke Home</a> ' +
-    '<a href="../services/" class="btn btn-outline">Lihat Paket Lain</a>';
+    '<a href="index.html" class="btn btn-gold">Kembali ke Home</a> ' +
+    '<a href="services.html" class="btn btn-outline">Lihat Paket Lain</a>';
 }
 
-// ----- Halaman custom-package (/custom-package/index.html) -----
+// ----- Halaman custom-package (custom-package.html) -----
 function initCustomPackagePage() {
   const form = document.getElementById("customForm");
   const successPanel = document.getElementById("customSuccess");

@@ -8,7 +8,7 @@ function renderServices() {
   if (!grid) return;
 
   grid.innerHTML = SEED_PACKAGES.map(function (pkg) {
-    return renderPackageCard(pkg, "../");
+    return renderPackageCard(pkg);
   }).join("");
 }
 
@@ -25,7 +25,7 @@ document.addEventListener("click", function (event) {
   showToast("Paket " + pkg.name + " dipilih. Silakan isi form booking.", "success");
 
   setTimeout(function () {
-    location.href = "../booking/";
+    location.href = "booking.html";
   }, 700);
 });
 

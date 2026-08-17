@@ -5,7 +5,7 @@
    pesanan toko, invoice, kontrak
    ============================================================ */
 
-/* =================== DASHBOARD (admin/index.html) =================== */
+/* =================== DASHBOARD (admin.html) =================== */
 function initDashboard() {
   const bookings = getBookings();
   const photos = getPhotos();
@@ -30,7 +30,7 @@ function initDashboard() {
             '<div class="who">' + b.name + " · " + b.package + "</div>" +
             '<div class="meta">' + formatDate(b.date) + " · " + formatRupiah(b.packagePrice || 0) + "</div>" +
             '<div class="board-actions">' + statusBadge(b.status) +
-            '<a class="btn-mini" href="bookings.html">Kelola</a>' +
+            '<a class="btn-mini" href="admin-bookings.html">Kelola</a>' +
             "</div></div>"
           );
         }).join("")
@@ -60,7 +60,7 @@ function setText(id, text) {
   if (el) el.textContent = text;
 }
 
-/* =================== BOOKINGS BOARD (admin/bookings.html) =================== */
+/* =================== BOOKINGS BOARD (admin-bookings.html) =================== */
 function renderBookingsBoard() {
   const bookings = getBookings();
   const columns = ["Pending", "Confirmed", "Completed"];
@@ -130,7 +130,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
-/* =================== KELOLA GALERI (admin/gallery.html) =================== */
+/* =================== KELOLA GALERI (admin-gallery.html) =================== */
 function renderAdminGallery() {
   const photos = getPhotos();
   const tbody = document.getElementById("photoTableBody");
@@ -241,7 +241,7 @@ document.addEventListener("click", function (event) {
   showToast("Foto dihapus.");
 });
 
-/* =================== PESANAN TOKO (admin/orders.html) =================== */
+/* =================== PESANAN TOKO (admin-orders.html) =================== */
 function renderAdminOrders() {
   const tbody = document.getElementById("ordersBody");
   if (!tbody) return;
@@ -286,7 +286,7 @@ document.addEventListener("change", function (event) {
   }
 });
 
-/* =================== INVOICE (admin/invoice-preview.html) =================== */
+/* =================== INVOICE (invoice-preview.html) =================== */
 function renderInvoice() {
   const panel = document.getElementById("invoicePanel");
   if (!panel) return;
@@ -297,7 +297,7 @@ function renderInvoice() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Invoice tidak ditemukan.<br><br>' +
-      '<a href="bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
+      '<a href="admin-bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
     return;
   }
 
@@ -324,7 +324,7 @@ function renderInvoice() {
     "Pembayaran: Transfer ke rekening ZANSTDO (simulasi).</div>";
 }
 
-/* =================== KONTAK (admin/contract-preview.html) =================== */
+/* =================== KONTAK (contract-preview.html) =================== */
 function renderContract() {
   const panel = document.getElementById("contractPanel");
   if (!panel) return;
@@ -335,7 +335,7 @@ function renderContract() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Kontrak tidak ditemukan.<br><br>' +
-      '<a href="bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
+      '<a href="admin-bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
     return;
   }
 

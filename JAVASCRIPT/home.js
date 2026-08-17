@@ -12,7 +12,7 @@ function renderHome() {
   if (highlightEl) {
     highlightEl.innerHTML = photos.slice(0, 6).map(function (photo) {
       return (
-        '<a href="portfolio/" class="card">' +
+        '<a href="portfolio.html" class="card">' +
         '<div class="card-img"><img src="' + photo.url + '" alt="' + photo.title + '"></div>' +
         '<div class="card-body">' +
         '<div class="card-title">' + photo.title + "</div>" +
@@ -33,7 +33,7 @@ function renderHome() {
       });
       const img = photo ? photo.url : "https://picsum.photos/seed/" + cat + "/600/400";
       return (
-        '<a href="portfolio/?cat=' + encodeURIComponent(cat) + '" class="cat-tile">' +
+        '<a href="portfolio.html?cat=' + encodeURIComponent(cat) + '" class="cat-tile">' +
         '<img src="' + img + '" alt="' + cat + '">' +
         "<span>" + cat + "</span>" +
         "</a>"
@@ -49,7 +49,7 @@ function renderHome() {
         return pkg.id !== "custom";
       })
       .map(function (pkg) {
-        return renderPackageCard(pkg, "");
+        return renderPackageCard(pkg);
       })
       .join("");
   }

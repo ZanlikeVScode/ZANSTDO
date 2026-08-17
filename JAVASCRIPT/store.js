@@ -3,7 +3,7 @@
    Logika Store, Cart, dan Checkout
    ============================================================ */
 
-// ----- Halaman store (/store/index.html) -----
+// ----- Halaman shop (shop.html) -----
 function renderStore() {
   const grid = document.getElementById("productGrid");
   if (!grid) return;
@@ -85,7 +85,7 @@ document.addEventListener("click", function (event) {
   }
 });
 
-// ----- Halaman cart (/cart/index.html) -----
+// ----- Halaman cart (cart.html) -----
 function renderCart() {
   const tbody = document.getElementById("cartBody");
   const summary = document.getElementById("cartSummary");
@@ -101,7 +101,7 @@ function renderCart() {
       emptyBox.style.display = "block";
       emptyBox.innerHTML =
         '<div class="empty"><div class="empty-icon">🛒</div>Keranjang masih kosong.<br><br>' +
-        '<a href="../store/" class="btn btn-gold">Lihat Produk</a></div>';
+        '<a href="shop.html" class="btn btn-gold">Lihat Produk</a></div>';
     }
     return;
   }
@@ -173,7 +173,7 @@ function handleCartAction(event) {
 
 document.addEventListener("click", handleCartAction);
 
-// ----- Halaman checkout (/checkout/index.html) -----
+// ----- Halaman checkout (checkout.html) -----
 let selectedPayment = "";
 
 function renderCheckoutSummary() {
@@ -187,7 +187,7 @@ function renderCheckoutSummary() {
       emptyBox.style.display = "block";
       emptyBox.innerHTML =
         '<div class="empty"><div class="empty-icon">🛒</div>Keranjang kosong, isi dulu di Store.<br><br>' +
-        '<a href="../store/" class="btn btn-gold">Ke Store</a></div>';
+        '<a href="shop.html" class="btn btn-gold">Ke Shop</a></div>';
     }
     return;
   }

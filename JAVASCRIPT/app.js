@@ -67,12 +67,12 @@ document.addEventListener("click", function (event) {
 });
 
 // Kartu paket layanan (dipakai di Home & Services)
-function renderPackageCard(pkg, basePath) {
+function renderPackageCard(pkg) {
   const tag = pkg.tag ? '<span class="badge status-offer tag">' + pkg.tag + "</span>" : "";
   const priceText = pkg.price ? formatRupiah(pkg.price) + '<small> /sesi</small>' : '<small>Negosiasi</small>';
   const button =
     pkg.id === "custom"
-      ? '<a href="' + basePath + 'custom-package/" class="btn btn-outline">Request Custom</a>'
+      ? '<a href="custom-package.html" class="btn btn-outline">Request Custom</a>'
       : '<button class="btn btn-gold" data-pick-package="' + pkg.id + '">Pilih Paket</button>';
 
   const popularClass = pkg.id === "standard" ? " popular" : "";
@@ -130,16 +130,25 @@ function initSharedUI() {
     });
   }
 
-  // Menandai menu yang sedang aktif berdasarkan folder halaman
-  const path = location.pathname.split("/").filter(Boolean);
+  // Menandai menu yang sedang aktif berdasarkan nama file halaman
+  const path = location.pathname;
   let matched = null;
-  if (path.includes("portfolio")) matched = "portfolio";
-  else if (path.includes("gallery")) matched = "gallery";
-  else if (path.includes("services")) matched = "services";
-  else if (path.includes("booking")) matched = "booking";
-  else if (path.includes("store")) matched = "store";
-  else if (path.includes("cart")) matched = "store";
-  else if (path.includes("checkout")) matched = "store";
+
+  const pageKeys = [
+    ["portfolio.html", "portfolio"],
+    ["services.html", "services"],
+    ["custom-package.html", "services"],
+    ["booking.html", "booking"],
+    ["booking-success.html", "booking"],
+    ["gallery.html", "gallery"],
+    ["shop.html", "shop"],
+    ["cart.html", "shop"],
+    ["checkout.html", "shop"]
+  ];
+
+  pageKeys.forEach(function (pair) {
+    if (path.includes(pair[0])) matched = pair[1];
+  });
 
   document.querySelectorAll("[data-nav]").forEach(function (link) {
     const key = link.getAttribute("data-nav");
