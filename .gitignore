@@ -13,3 +13,6 @@ Thumbs.db
 # Output build (tidak dipakai di proyek ini)
 dist/
 build/
+
+# Referensi desain (bukan bagian website)
+design.md/

@@ -23,7 +23,6 @@
       <a href="services.html" data-nav="services">Services</a>
       <a href="booking.html" data-nav="booking">Booking</a>
       <a href="shop.html" data-nav="shop">Shop</a>
-      <a href="gallery.html?id=wedding-andi-sari" data-nav="gallery">Gallery</a>
     </nav>
     <a class="cart-link" href="cart.html" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></a>
   </div>
@@ -34,21 +33,105 @@
   <div class="container">
     <span class="eyebrow">Portfolio</span>
     <h1>Hasil Karya Kami</h1>
-    <p>Jelajahi koleksi foto berdasarkan kategori menggunakan filter di bawah ini.</p>
+    <p>Lihat karya studio kami, atau jelajahi galeri foto acara klien.</p>
   </div>
 </section>
 
-<!-- Filter -->
+<!-- Tab -->
 <div class="container">
-  <div class="filter-bar" id="filterBar"></div>
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn active" data-tab="studio">📸 Karya Studio</button>
+    <button class="tab-btn" data-tab="klien">🖼️ Galeri Klien</button>
+  </div>
 </div>
 
-<!-- Grid foto -->
-<section style="padding-top: 8px; padding-bottom: 72px;">
+<!-- Panel: Karya Studio -->
+<div class="tab-panel active" id="panel-studio">
   <div class="container">
-    <div class="grid grid-3" id="portfolioGrid"></div>
+    <div class="filter-bar" id="filterBar"></div>
   </div>
-</section>
+  <section class="section-tight pb-6">
+    <div class="container">
+      <div class="grid grid-3" id="portfolioGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Panel: Galeri Klien -->
+<div class="tab-panel" id="panel-klien">
+
+  <!-- Cover galeri -->
+  <section class="cover-hero cover-compact">
+    <div class="cover-bg" id="coverBg"></div>
+    <div class="container cover-content">
+      <span class="badge status-offer" id="coverCategory"></span>
+      <h1 id="coverTitle"></h1>
+      <div class="meta">
+        <span>📅 <span id="coverDate"></span></span>
+        <span>❤️ <span id="favBadge">0 foto dipilih</span></span>
+      </div>
+      <div class="hero-actions" style="justify-content:flex-start;">
+        <button class="btn btn-gold" id="favToggle">Lihat Favorit</button>
+        <button class="btn btn-light" data-open-pin>Download</button>
+        <a class="btn btn-light" href="shop.html">Order Print</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid foto -->
+  <section class="section-tight pb-6">
+    <div class="container">
+      <div class="masonry" id="galleryGrid"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Modal Komentar -->
+<div class="modal" id="commentModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <h3>💬 Komentar</h3>
+        <p id="commentPhotoTitle"></p>
+      </div>
+      <button class="modal-close" data-close-modal="commentModal" aria-label="Tutup">×</button>
+    </div>
+    <div id="commentList"></div>
+    <form id="commentForm" novalidate>
+      <div class="form-group">
+        <label for="commentName">Nama</label>
+        <input class="input" type="text" id="commentName" placeholder="Nama kamu">
+      </div>
+      <div class="form-group">
+        <label for="commentText">Komentar</label>
+        <textarea class="input" id="commentText" placeholder="Tulis komentarmu…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold btn-sm">Simpan Komentar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal PIN -->
+<div class="modal" id="pinModal">
+  <div class="modal-card" style="max-width: 420px;">
+    <div class="modal-head">
+      <div>
+        <h3>🔒 Download Galeri</h3>
+        <p>Masukkan PIN untuk membuka akses download.</p>
+      </div>
+      <button class="modal-close" data-close-modal="pinModal" aria-label="Tutup">×</button>
+    </div>
+    <div class="form-group">
+      <label for="pinInput">PIN Galeri</label>
+      <input class="input" type="password" id="pinInput" placeholder="Masukkan PIN">
+    </div>
+    <p id="pinMessage" class="mb-2" style="font-size: 14px;"></p>
+    <button class="btn btn-dark btn-sm" data-check-pin>Cek PIN</button>
+    <br><br>
+    <button class="btn btn-gold" id="downloadReady" data-download-sim style="display: none;">📥 Download Foto</button>
+  </div>
+</div>
 
 <!-- CTA -->
 <section class="cta-band">
@@ -77,14 +160,13 @@
       </div>
       <div>
         <h4>Lainnya</h4>
-        <a href="gallery.html?id=wedding-andi-sari">Contoh Galeri Klien</a>
-        <a href="custom-package.html">Request Custom</a>
-        <a href="admin.html">Admin (tanpa login)</a>
+        <a href="portfolio.html?tab=klien">Contoh Galeri Klien</a>
+        <a href="booking.html?package=custom">Request Custom</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© <span id="footerYear">2026</span> ZANSTDO — Studio Lensa Belajar</span>
-      <span>Dibuat untuk pembelajaran web programming</span>
+      <span>Dibuat untuk pembelajaran web programming · <a class="admin-link" href="admin.html">Admin (tanpa login)</a></span>
     </div>
   </div>
 </footer>
@@ -93,6 +175,7 @@
 <script src="JAVASCRIPT/data.js"></script>
 <script src="JAVASCRIPT/app.js"></script>
 <script src="JAVASCRIPT/portfolio.js"></script>
+<script src="JAVASCRIPT/gallery.js"></script>
 <script>
   document.getElementById("footerYear").textContent = new Date().getFullYear();
 </script>

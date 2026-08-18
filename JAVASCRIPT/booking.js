@@ -1,6 +1,7 @@
 /* ============================================================
    ZANSTDO - booking.js
-   Logika halaman booking, booking-success, dan custom-package
+   Logika halaman booking dan booking-success.
+   Paket custom kini inline di form booking (bukan halaman terpisah).
    ============================================================ */
 
 // ----- Halaman booking (booking.html) -----
@@ -8,7 +9,7 @@ function initBookingPage() {
   const select = document.getElementById("bookingPackage");
   if (!select) return;
 
-  // Isi pilihan paket dari data
+  // Isi pilihan paket dari data (tanpa paket custom)
   SEED_PACKAGES.filter(function (pkg) {
     return pkg.id !== "custom";
   }).forEach(function (pkg) {
@@ -19,21 +20,55 @@ function initBookingPage() {
     select.appendChild(option);
   });
 
-  // Paket yang dipilih di halaman Services otomatis terisi
+  // Opsi custom langsung di dropdown
+  const customOption = document.createElement("option");
+  customOption.value = "custom";
+  customOption.textContent = "Custom — request harga";
+  select.appendChild(customOption);
+
+  select.addEventListener("change", function () {
+    toggleCustomFields(select.value === "custom");
+  });
+
+  // Kasus 1: datang dengan ?package=custom (link "Request Custom")
+  const params = new URLSearchParams(location.search);
+  if (params.get("package") === "custom") {
+    select.value = "custom";
+    toggleCustomFields(true);
+    showNotice("Mode paket custom aktif. Isi detail kebutuhan di bawah.");
+    return;
+  }
+
+  // Kasus 2: paket yang dipilih di halaman Services otomatis terisi
   const saved = localStorage.getItem("zanstdo_selectedPackage");
   if (saved) {
     try {
       const pkg = JSON.parse(saved);
       select.value = pkg.id;
-
-      const notice = document.getElementById("packageNotice");
-      if (notice) {
-        notice.textContent = "Paket terpilih dari halaman Services: " + pkg.name;
-        notice.classList.add("show");
+      if (pkg.id === "custom") {
+        toggleCustomFields(true);
+        showNotice("Paket terpilih dari halaman Services: " + pkg.name);
+      } else {
+        showNotice("Paket terpilih dari halaman Services: " + pkg.name);
       }
     } catch (error) {
       console.warn("Gagal membaca paket terpilih:", error);
     }
+  }
+}
+
+function showNotice(message) {
+  const notice = document.getElementById("packageNotice");
+  if (notice) {
+    notice.textContent = message;
+    notice.classList.add("show");
+  }
+}
+
+function toggleCustomFields(show) {
+  const panel = document.getElementById("customFields");
+  if (panel) {
+    panel.style.display = show ? "block" : "none";
   }
 }
 
@@ -69,6 +104,20 @@ if (bookingForm) {
     const packageId = document.getElementById("bookingPackage").value;
     const notes = document.getElementById("bookingNotes").value.trim();
 
+    const isCustom = packageId === "custom";
+    const customEventType = isCustom
+      ? document.getElementById("customEventType").value
+      : "";
+    const customDuration = isCustom
+      ? document.getElementById("customDuration").value.trim()
+      : "";
+    const customBudget = isCustom
+      ? document.getElementById("customBudget").value.trim()
+      : "";
+    const customNotes = isCustom
+      ? document.getElementById("customNotes").value.trim()
+      : "";
+
     // Validasi
     let valid = true;
     valid = setFieldError("bookingName", name ? "" : "Nama lengkap wajib diisi.") && valid;
@@ -81,6 +130,11 @@ if (bookingForm) {
     valid = setFieldError("bookingDate", date ? "" : "Tanggal acara wajib diisi.") && valid;
     valid = setFieldError("bookingPackage", packageId ? "" : "Pilih salah satu paket.") && valid;
 
+    if (isCustom) {
+      valid = setFieldError("customEventType", customEventType ? "" : "Pilih jenis acara.") && valid;
+      valid = setFieldError("customBudget", customBudget ? "" : "Estimasi budget wajib diisi.") && valid;
+    }
+
     if (!valid) {
       showToast("Periksa kembali data yang diisi.", "error");
       return;
@@ -90,19 +144,42 @@ if (bookingForm) {
       return item.id === packageId;
     });
 
-    // Simpan booking ke LocalStorage
     const booking = {
       id: "booking-" + Date.now(),
       name: name,
       email: email,
       phone: phone,
       date: date,
-      package: pkg ? pkg.name : packageId,
-      packagePrice: pkg ? pkg.price : 0,
+      package: isCustom ? "Custom — request harga" : (pkg ? pkg.name : packageId),
+      packagePrice: isCustom ? 0 : (pkg ? pkg.price : 0),
       notes: notes,
       status: "Pending",
       createdAt: new Date().toISOString()
     };
+
+    if (isCustom) {
+      booking.custom = {
+        eventType: customEventType,
+        duration: customDuration || "Belum ditentukan",
+        budget: customBudget,
+        notes: customNotes
+      };
+
+      // Catat juga sebagai request custom agar tetap muncul di board admin
+      // (satu pengiriman = satu id yang sama).
+      const requests = getCustomRequests();
+      requests.push({
+        id: booking.id,
+        name: name,
+        eventType: customEventType,
+        duration: booking.custom.duration,
+        budget: customBudget,
+        notes: customNotes,
+        status: "Menunggu Penawaran",
+        createdAt: booking.createdAt
+      });
+      saveCustomRequests(requests);
+    }
 
     const bookings = getBookings();
     bookings.push(booking);
@@ -141,6 +218,11 @@ function initBookingSuccessPage() {
     "<div class=\"detail-row\"><span class=\"detail-label\">Paket</span><span class=\"detail-value\">" + booking.package + "</span></div>" +
     "<div class=\"detail-row\"><span class=\"detail-label\">Tanggal Acara</span><span class=\"detail-value\">" + formatDate(booking.date) + "</span></div>" +
     "<div class=\"detail-row\"><span class=\"detail-label\">Nomor WhatsApp</span><span class=\"detail-value\">" + booking.phone + "</span></div>" +
+    (booking.custom
+      ? '<div class="detail-row"><span class="detail-label">Jenis Acara</span><span class="detail-value">' + booking.custom.eventType + "</span></div>" +
+        '<div class="detail-row"><span class="detail-label">Durasi Sesi</span><span class="detail-value">' + booking.custom.duration + "</span></div>" +
+        '<div class="detail-row"><span class="detail-label">Estimasi Budget</span><span class="detail-value">' + booking.custom.budget + "</span></div>"
+      : "") +
     (booking.notes
       ? '<div class="detail-row"><span class="detail-label">Catatan</span><span class="detail-value">' + booking.notes + "</span></div>"
       : "") +
@@ -150,75 +232,6 @@ function initBookingSuccessPage() {
     '<a href="services.html" class="btn btn-outline">Lihat Paket Lain</a>';
 }
 
-// ----- Halaman custom-package (custom-package.html) -----
-function initCustomPackagePage() {
-  const form = document.getElementById("customForm");
-  const successPanel = document.getElementById("customSuccess");
-  const statusSection = document.getElementById("customStatus");
-
-  // Tampilkan status request custom terakhir pengguna
-  if (statusSection) {
-    const lastId = localStorage.getItem("zanstdo_lastCustomRequest");
-    const requests = getCustomRequests();
-    const last = lastId ? requests.find(function (r) { return r.id === lastId; }) : null;
-
-    if (last) {
-      document.getElementById("customStatusBody").innerHTML =
-        '<div class="detail-list">' +
-        "<div class=\"detail-row\"><span class=\"detail-label\">Kode Request</span><span class=\"detail-value\">" + last.id + "</span></div>" +
-        "<div class=\"detail-row\"><span class=\"detail-label\">Jenis Acara</span><span class=\"detail-value\">" + last.eventType + "</span></div>" +
-        "<div class=\"detail-row\"><span class=\"detail-label\">Budget</span><span class=\"detail-value\">" + last.budget + "</span></div>" +
-        '<div class="detail-row"><span class="detail-label">Status</span><span class="detail-value">' + statusBadge(last.status) + "</span></div>" +
-        "</div>";
-      statusSection.style.display = "block";
-    }
-  }
-
-  if (!form) return;
-
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const name = document.getElementById("customName").value.trim();
-    const eventType = document.getElementById("customEventType").value;
-    const duration = document.getElementById("customDuration").value.trim();
-    const budget = document.getElementById("customBudget").value.trim();
-    const notes = document.getElementById("customNotes").value.trim();
-
-    let valid = true;
-    valid = setFieldError("customName", name ? "" : "Nama wajib diisi.") && valid;
-    valid = setFieldError("customEventType", eventType ? "" : "Pilih jenis acara.") && valid;
-    valid = setFieldError("customBudget", budget ? "" : "Budget wajib diisi.") && valid;
-
-    if (!valid) {
-      showToast("Periksa kembali data yang diisi.", "error");
-      return;
-    }
-
-    const request = {
-      id: "custom-" + Date.now(),
-      name: name,
-      eventType: eventType,
-      duration: duration || "Belum ditentukan",
-      budget: budget,
-      notes: notes,
-      status: "Menunggu Penawaran",
-      createdAt: new Date().toISOString()
-    };
-
-    const requests = getCustomRequests();
-    requests.push(request);
-    saveCustomRequests(requests);
-
-    localStorage.setItem("zanstdo_lastCustomRequest", request.id);
-
-    form.reset();
-    if (successPanel) successPanel.classList.add("show");
-    showToast("Request custom terkirim. Admin akan menghubungi Anda.", "success");
-  });
-}
-
 // Jalankan init sesuai halaman yang sedang dibuka
 initBookingPage();
 initBookingSuccessPage();
-initCustomPackagePage();

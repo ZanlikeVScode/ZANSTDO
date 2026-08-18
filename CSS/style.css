@@ -21,6 +21,12 @@
   --radius: 14px;
   --shadow-sm: 0 2px 10px rgba(31, 29, 26, 0.06);
   --shadow-md: 0 8px 30px rgba(31, 29, 26, 0.12);
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 72px;
   --font-head: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
@@ -118,6 +124,27 @@ section {
 
 .small {
   font-size: 13px;
+}
+
+/* ---------- Utilitas spacing (berbasis token) ---------- */
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.pt-1 { padding-top: var(--space-1); }
+.pb-6 { padding-bottom: var(--space-6); }
+
+/* Tombol selebar kontainer */
+.btn-block {
+  width: 100%;
+}
+
+/* Section yang mengikuti page-hero: hanya ruang kecil di atas */
+.section-tight {
+  padding-top: var(--space-1);
 }
 
 .link-gold {
@@ -395,6 +422,12 @@ section {
   flex-wrap: wrap;
 }
 
+.hero-note {
+  margin-top: var(--space-3);
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
 /* Cover galeri (lebih pendek dari hero) */
 .cover-hero {
   position: relative;
@@ -410,6 +443,25 @@ section {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(20, 18, 15, 0.2), rgba(20, 18, 15, 0.75));
+}
+
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Cover di dalam tab: versi lebih ringkas */
+.cover-compact {
+  min-height: 300px;
+  border-radius: var(--radius);
+  margin-bottom: var(--space-4);
+}
+
+.cover-compact .cover-content {
+  padding: 28px 0 32px;
 }
 
 .cover-content {
@@ -436,7 +488,7 @@ section {
 
 /* ---------- Page hero (halaman dalam) ---------- */
 .page-hero {
-  padding: 64px 0 8px;
+  padding: 64px 0 24px;
   text-align: center;
 }
 
@@ -552,6 +604,57 @@ section {
   background: var(--ink);
   color: #fff;
   border-color: var(--ink);
+}
+
+/* ---------- Tab (Karya Studio / Galeri Klien) ---------- */
+.tab-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-weight: 600;
+  font-size: 14.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-dark);
+}
+
+.tab-btn.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.tab-panel .filter-bar {
+  margin-top: var(--space-2);
+}
+
+/* ---------- Form paket custom (inline di halaman booking) ---------- */
+.custom-fields {
+  background: var(--bg);
+  border: 1px dashed var(--gold);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: var(--space-2);
 }
 
 /* ---------- Foto galeri klien ---------- */
@@ -1320,4 +1423,15 @@ textarea.input {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.footer-bottom .admin-link {
+  color: inherit;
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.footer-bottom .admin-link:hover {
+  color: var(--gold);
+  opacity: 1;
 }

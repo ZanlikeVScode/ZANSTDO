@@ -23,7 +23,6 @@
       <a href="services.html" data-nav="services">Services</a>
       <a href="booking.html" data-nav="booking">Booking</a>
       <a href="shop.html" data-nav="shop">Shop</a>
-      <a href="gallery.html?id=wedding-andi-sari" data-nav="gallery">Gallery</a>
     </nav>
     <a class="cart-link" href="cart.html" title="Keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></a>
   </div>
@@ -39,7 +38,7 @@
 </section>
 
 <!-- Form -->
-<section style="padding-top: 8px;">
+<section class="section-tight">
   <div class="container-narrow">
     <div class="notice" id="packageNotice"></div>
 
@@ -83,8 +82,45 @@
         </div>
       </div>
 
-      <p class="muted-text small" style="margin-bottom: 16px;">
-        Butuh paket custom? <a class="link-gold" href="custom-package.html">Request custom di sini →</a>
+      <div class="custom-fields" id="customFields" style="display: none;">
+        <p class="muted-text small mb-2">
+          Paket custom dibuat sesuai kebutuhanmu. Isi detail di bawah, penawaran harga menyusul dari admin.
+        </p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="customEventType">Jenis Acara *</label>
+            <select class="input" id="customEventType">
+              <option value="">— Pilih Jenis Acara —</option>
+              <option>Wedding</option>
+              <option>Prewedding</option>
+              <option>Graduation</option>
+              <option>Event / Acara Keluarga</option>
+              <option>Corporate</option>
+              <option>Lainnya</option>
+            </select>
+            <div class="field-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="customDuration">Durasi Sesi</label>
+            <input class="input" type="text" id="customDuration" placeholder="Mis. 4 jam">
+          </div>
+
+          <div class="form-group">
+            <label for="customBudget">Estimasi Budget *</label>
+            <input class="input" type="text" id="customBudget" placeholder="Mis. Rp1.500.000">
+            <div class="field-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="customNotes">Catatan Kebutuhan</label>
+            <input class="input" type="text" id="customNotes" placeholder="Mis. lokasi di luar kota, perlu drone">
+          </div>
+        </div>
+      </div>
+
+      <p class="muted-text small mb-2">
+        Ingin paket yang disesuaikan? Pilih <strong>Custom — request harga</strong> dari daftar paket di atas.
       </p>
 
       <button type="submit" class="btn btn-gold">Kirim Booking</button>
@@ -109,14 +145,13 @@
       </div>
       <div>
         <h4>Lainnya</h4>
-        <a href="gallery.html?id=wedding-andi-sari">Contoh Galeri Klien</a>
-        <a href="custom-package.html">Request Custom</a>
-        <a href="admin.html">Admin (tanpa login)</a>
+        <a href="portfolio.html?tab=klien">Contoh Galeri Klien</a>
+        <a href="booking.html?package=custom">Request Custom</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© <span id="footerYear">2026</span> ZANSTDO — Studio Lensa Belajar</span>
-      <span>Dibuat untuk pembelajaran web programming</span>
+      <span>Dibuat untuk pembelajaran web programming · <a class="admin-link" href="admin.html">Admin (tanpa login)</a></span>
     </div>
   </div>
 </footer>

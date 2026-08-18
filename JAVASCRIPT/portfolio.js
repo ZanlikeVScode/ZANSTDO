@@ -1,9 +1,13 @@
 /* ============================================================
    ZANSTDO - portfolio.js
-   Logika halaman portfolio: grid foto + filter kategori
+   Logika halaman portfolio: tab (Karya Studio / Galeri Klien),
+   grid foto + filter kategori
    ============================================================ */
 
 let currentCategory = "all";
+let activeTab = "studio";
+
+/* ---------- Karya Studio ---------- */
 
 function renderPortfolio() {
   const photos = getPhotos();
@@ -61,7 +65,33 @@ function renderFilters() {
     .join("");
 }
 
-// Ambil kategori dari URL (?cat=Wedding) lalu aktifkan
+/* ---------- Tab ---------- */
+
+function getTabFromUrl() {
+  const params = new URLSearchParams(location.search);
+  const tab = params.get("tab");
+  return tab === "klien" ? "klien" : "studio";
+}
+
+function setActiveTab(tab) {
+  activeTab = tab;
+
+  document.querySelectorAll(".tab-btn").forEach(function (btn) {
+    btn.classList.toggle("active", btn.getAttribute("data-tab") === tab);
+  });
+
+  document.querySelectorAll(".tab-panel").forEach(function (panel) {
+    panel.classList.toggle("active", panel.id === "panel-" + tab);
+  });
+
+  // Buka ke Galeri Klien: pindah ke konten tab
+  if (tab === "klien") {
+    document.getElementById("panel-klien").scrollIntoView({ block: "start" });
+  }
+}
+
+/* ---------- Inisialisasi ---------- */
+
 function applyCategoryFromUrl() {
   const params = new URLSearchParams(location.search);
   const cat = params.get("cat");
@@ -71,6 +101,12 @@ function applyCategoryFromUrl() {
 }
 
 document.addEventListener("click", function (event) {
+  const tabBtn = event.target.closest(".tab-btn");
+  if (tabBtn) {
+    setActiveTab(tabBtn.getAttribute("data-tab"));
+    return;
+  }
+
   const btn = event.target.closest(".filter-btn");
   if (!btn) return;
 
@@ -80,5 +116,6 @@ document.addEventListener("click", function (event) {
 });
 
 applyCategoryFromUrl();
+setActiveTab(getTabFromUrl());
 renderFilters();
 renderPortfolio();

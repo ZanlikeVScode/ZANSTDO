@@ -72,7 +72,7 @@ function renderPackageCard(pkg) {
   const priceText = pkg.price ? formatRupiah(pkg.price) + '<small> /sesi</small>' : '<small>Negosiasi</small>';
   const button =
     pkg.id === "custom"
-      ? '<a href="custom-package.html" class="btn btn-outline">Request Custom</a>'
+      ? '<a href="booking.html?package=custom" class="btn btn-outline">Request Custom</a>'
       : '<button class="btn btn-gold" data-pick-package="' + pkg.id + '">Pilih Paket</button>';
 
   const popularClass = pkg.id === "standard" ? " popular" : "";
@@ -137,10 +137,8 @@ function initSharedUI() {
   const pageKeys = [
     ["portfolio.html", "portfolio"],
     ["services.html", "services"],
-    ["custom-package.html", "services"],
     ["booking.html", "booking"],
     ["booking-success.html", "booking"],
-    ["gallery.html", "gallery"],
     ["shop.html", "shop"],
     ["cart.html", "shop"],
     ["checkout.html", "shop"]

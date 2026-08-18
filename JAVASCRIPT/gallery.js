@@ -1,7 +1,7 @@
 /* ============================================================
    ZANSTDO - gallery.js
-   Logika galeri klien:
-   cover, masonry grid, watermark, favorit, komentar,
+   Logika galeri klien (dipasang di tab "Galeri Klien" halaman
+   portfolio): cover, masonry grid, watermark, favorit, komentar,
    PIN download, order print
    ============================================================ */
 
