@@ -31,7 +31,7 @@ function renderHome() {
       const photo = photos.find(function (p) {
         return p.category === cat;
       });
-      const img = photo ? photo.url : "https://picsum.photos/seed/" + cat + "/600/400";
+      const img = photo ? photo.url : ph(cat, 600, 400);
       return (
         '<a href="portfolio.html?cat=' + encodeURIComponent(cat) + '" class="cat-tile">' +
         '<img src="' + img + '" alt="' + cat + '">' +

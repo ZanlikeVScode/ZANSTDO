@@ -28,6 +28,38 @@ function writeData(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+// ----- Placeholder gambar (siluet ala Bootstrap) -----
+// Pengganti foto AI/random: kotak abu-abu + siluet kamera + label,
+// dikirim sebagai data URI SVG sehingga tidak butuh internet.
+function ph(label, w, h, dark) {
+  const bg = dark ? "#161C19" : "#E9ECEF";
+  const fg = dark ? "#9AA5A3" : "#6C757D";
+  const wpx = w || 600;
+  const hpx = h || 400;
+
+  const bw = Math.round(wpx * 0.5);
+  const bh = Math.round(hpx * 0.34);
+  const bx = Math.round((wpx - bw) / 2);
+  const by = Math.round((hpx - bh) / 2);
+  const lens = Math.round(bh * 0.42);
+  const cx = Math.round(wpx / 2);
+  const cy = Math.round(hpx / 2);
+  const pad = Math.round(bh * 0.18);
+
+  const svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="' + wpx + '" height="' + hpx + '" viewBox="0 0 ' + wpx + " " + hpx + '">' +
+    '<rect width="100%" height="100%" fill="' + bg + '"/>' +
+    '<g opacity="0.55">' +
+    '<rect x="' + bx + '" y="' + (by + pad) + '" width="' + bw + '" height="' + bh + '" rx="' + Math.round(bh * 0.14) + '"/>' +
+    '<rect x="' + Math.round(bx + bw * 0.36) + '" y="' + Math.round(by + pad - bh * 0.16) + '" width="' + Math.round(bw * 0.28) + '" height="' + Math.round(bh * 0.18) + '" rx="4"/>' +
+    '<circle cx="' + cx + '" cy="' + cy + '" r="' + lens + '" fill="' + bg + '" stroke="' + fg + '" stroke-width="' + Math.max(6, Math.round(bh * 0.08)) + '"/>' +
+    "</g>" +
+    '<text x="50%" y="' + Math.round(hpx * 0.9) + '" fill="' + fg + '" font-family="Inter, system-ui, sans-serif" font-size="' + Math.max(14, Math.round(wpx * 0.028)) + '" font-weight="600" text-anchor="middle">' + (label || "ZANSTDO") + "</text>" +
+    "</svg>";
+
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
 // ----- Photos -----
 function getPhotos() {
   return readData(STORAGE_KEYS.photos) || [];

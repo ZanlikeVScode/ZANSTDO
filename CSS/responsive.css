@@ -60,7 +60,7 @@
     align-items: stretch;
     padding: 10px;
     border-bottom: 1px solid var(--line);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-overlay);
   }
 
   .nav-menu.open {

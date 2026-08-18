@@ -202,7 +202,6 @@ if (addPhotoForm) {
     const galleryId = document.getElementById("newPhotoGallery").value;
 
     let valid = true;
-    valid = setFieldError("newPhotoUrl", url ? "" : "URL foto wajib diisi.") && valid;
     valid = setFieldError("newPhotoTitle", title ? "" : "Judul foto wajib diisi.") && valid;
     valid = setFieldError("newPhotoCategory", category ? "" : "Pilih kategori.") && valid;
 
@@ -214,7 +213,7 @@ if (addPhotoForm) {
     const photos = getPhotos();
     photos.push({
       id: "photo-" + Date.now(),
-      url: url,
+      url: url || ph(title, 600, 600),
       title: title,
       category: category,
       galleryId: galleryId || "wedding-andi-sari",
@@ -297,7 +296,7 @@ function renderInvoice() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Invoice tidak ditemukan.<br><br>' +
-      '<a href="admin-bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
+      '<a href="admin-bookings.html" class="btn btn-primary">Kembali ke Booking</a></div>';
     return;
   }
 
@@ -335,7 +334,7 @@ function renderContract() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Kontrak tidak ditemukan.<br><br>' +
-      '<a href="admin-bookings.html" class="btn btn-gold">Kembali ke Booking</a></div>';
+      '<a href="admin-bookings.html" class="btn btn-primary">Kembali ke Booking</a></div>';
     return;
   }
 

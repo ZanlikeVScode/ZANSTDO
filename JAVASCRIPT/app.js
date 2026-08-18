@@ -73,7 +73,7 @@ function renderPackageCard(pkg) {
   const button =
     pkg.id === "custom"
       ? '<a href="booking.html?package=custom" class="btn btn-outline">Request Custom</a>'
-      : '<button class="btn btn-gold" data-pick-package="' + pkg.id + '">Pilih Paket</button>';
+      : '<button class="btn btn-primary" data-pick-package="' + pkg.id + '">Pilih Paket</button>';
 
   const popularClass = pkg.id === "standard" ? " popular" : "";
 

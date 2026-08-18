@@ -205,7 +205,7 @@ function initBookingSuccessPage() {
   if (!booking) {
     panel.innerHTML =
       '<div class="empty"><div class="empty-icon">❌</div>Data booking tidak ditemukan.<br><br>' +
-      '<a href="booking.html" class="btn btn-gold">Buat Booking Baru</a></div>';
+      '<a href="booking.html" class="btn btn-primary">Buat Booking Baru</a></div>';
     return;
   }
 
@@ -228,7 +228,7 @@ function initBookingSuccessPage() {
       : "") +
     '<div class="detail-row"><span class="detail-label">Status</span><span class="detail-value">' + statusBadge(booking.status) + "</span></div>" +
     "</div>" +
-    '<a href="index.html" class="btn btn-gold">Kembali ke Home</a> ' +
+    '<a href="index.html" class="btn btn-primary">Kembali ke Home</a> ' +
     '<a href="services.html" class="btn btn-outline">Lihat Paket Lain</a>';
 }
 

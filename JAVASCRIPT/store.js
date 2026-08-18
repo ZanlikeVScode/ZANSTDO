@@ -54,7 +54,7 @@ function productCard(product, photoId) {
     '<div class="product-type">' + product.type + "</div>" +
     '<div class="card-title">' + product.name + "</div>" +
     '<div class="product-price">' + formatRupiah(product.price) + "<small> /" + product.unit + "</small></div>" +
-    '<button class="btn btn-gold btn-sm" data-add-product="' + product.id + '" data-photo="' + (photoId || "") + '">Tambah ke Keranjang</button>' +
+    '<button class="btn btn-primary btn-sm" data-add-product="' + product.id + '" data-photo="' + (photoId || "") + '">Tambah ke Keranjang</button>' +
     "</div>"
   );
 }
@@ -101,7 +101,7 @@ function renderCart() {
       emptyBox.style.display = "block";
       emptyBox.innerHTML =
         '<div class="empty"><div class="empty-icon">🛒</div>Keranjang masih kosong.<br><br>' +
-        '<a href="shop.html" class="btn btn-gold">Lihat Produk</a></div>';
+        '<a href="shop.html" class="btn btn-primary">Lihat Produk</a></div>';
     }
     return;
   }
@@ -187,7 +187,7 @@ function renderCheckoutSummary() {
       emptyBox.style.display = "block";
       emptyBox.innerHTML =
         '<div class="empty"><div class="empty-icon">🛒</div>Keranjang kosong, isi dulu di Store.<br><br>' +
-        '<a href="shop.html" class="btn btn-gold">Ke Shop</a></div>';
+        '<a href="shop.html" class="btn btn-primary">Ke Shop</a></div>';
     }
     return;
   }

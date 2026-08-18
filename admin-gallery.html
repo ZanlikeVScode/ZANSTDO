@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galeri & Favorit — Admin ZANSTDO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="CSS/style.css">
 <link rel="stylesheet" href="CSS/responsive.css">
 <link rel="stylesheet" href="CSS/admin.css">
@@ -43,8 +43,8 @@
       <h2>✏️ Tambah Foto Baru (Preview via URL)</h2>
       <form class="form-grid" id="addPhotoForm" novalidate>
         <div class="form-group">
-          <label for="newPhotoUrl">URL Foto *</label>
-          <input class="input" type="url" id="newPhotoUrl" placeholder="https://picsum.photos/id/1035/600/400">
+          <label for="newPhotoUrl">URL Foto (kosongkan untuk placeholder)</label>
+          <input class="input" type="url" id="newPhotoUrl" placeholder="Kosong = siluet placeholder otomatis">
           <div class="field-error"></div>
         </div>
         <div class="form-group">
@@ -75,7 +75,7 @@
           </select>
         </div>
         <div style="grid-column: 1 / -1;">
-          <button type="submit" class="btn btn-gold btn-sm">Simpan Foto</button>
+          <button type="submit" class="btn btn-primary btn-sm">Simpan Foto</button>
         </div>
       </form>
     </div>

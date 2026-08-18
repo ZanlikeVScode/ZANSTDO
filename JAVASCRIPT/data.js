@@ -50,7 +50,7 @@ const SEED_GALLERIES = [
     title: "Wedding Andi & Sari",
     category: "Wedding",
     date: "2026-08-17",
-    coverUrl: "https://picsum.photos/id/1011/1400/600",
+    coverUrl: ph("Wedding Andi & Sari", 1400, 600, true),
     downloadPin: "ANDI2026"
   },
   {
@@ -58,7 +58,7 @@ const SEED_GALLERIES = [
     title: "Prewedding Raka & Nia",
     category: "Prewedding",
     date: "2026-09-05",
-    coverUrl: "https://picsum.photos/id/1047/1400/600",
+    coverUrl: ph("Prewedding Raka & Nia", 1400, 600, true),
     downloadPin: "RAKA2026"
   },
   {
@@ -66,7 +66,7 @@ const SEED_GALLERIES = [
     title: "Graduation SMAN 1 Bandung",
     category: "Event",
     date: "2026-06-20",
-    coverUrl: "https://picsum.photos/id/1050/1400/600",
+    coverUrl: ph("Graduation SMAN 1 Bandung", 1400, 600, true),
     downloadPin: "GRAD2026"
   },
   {
@@ -74,7 +74,7 @@ const SEED_GALLERIES = [
     title: "Family Portrait Keluarga Wijaya",
     category: "Portrait",
     date: "2026-07-12",
-    coverUrl: "https://picsum.photos/id/1043/1400/600",
+    coverUrl: ph("Family Portrait Keluarga Wijaya", 1400, 600, true),
     downloadPin: "WIJA2026"
   },
   {
@@ -82,7 +82,7 @@ const SEED_GALLERIES = [
     title: "Nature Adventure Papandayan",
     category: "Nature",
     date: "2026-05-30",
-    coverUrl: "https://picsum.photos/id/1015/1400/600",
+    coverUrl: ph("Nature Adventure Papandayan", 1400, 600, true),
     downloadPin: "PAPA2026"
   }
 ];
@@ -103,18 +103,11 @@ const SEED_PRODUCTS = [
   { id: "tshirt-photo", name: "T-Shirt Foto", type: "Aksesoris", price: 90000, unit: "pcs", emoji: "👕" }
 ];
 
-// Kumpulan id foto picsum (60 id untuk 5 galeri x 12 foto)
-const PICSUM_IDS = [
-  1011, 1012, 1013, 1014, 1015, 1016, 1018, 1019, 1020, 1021,
-  1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031,
-  1032, 1033, 1034, 1035, 1036, 1037, 1039, 1040, 1041, 1042,
-  1043, 1044, 1045, 1047, 1048, 1049, 1050, 1051, 1052, 1053,
-  1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063,
-  1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073
-];
-
 // Ukuran foto bergantian supaya grid masonry terlihat bervariasi
-const PHOTO_SIZES = ["600/400", "600/800", "600/500", "600/900", "600/700", "600/600"];
+// (lebar 600, tinggi bervariasi)
+const PHOTO_SIZES = [
+  [600, 400], [600, 800], [600, 500], [600, 900], [600, 700], [600, 600]
+];
 
 // Judul foto per galeri (12 judul per galeri)
 const GALLERY_TITLES = {
@@ -150,7 +143,7 @@ const GALLERY_TITLES = {
   ]
 };
 
-// Bangun 60 foto dari data galeri
+// Bangun 60 foto dari data galeri (placeholder siluet, bukan foto asli)
 function buildSeedPhotos() {
   const photos = [];
   let index = 0;
@@ -158,9 +151,10 @@ function buildSeedPhotos() {
   SEED_GALLERIES.forEach(gallery => {
     const titles = GALLERY_TITLES[gallery.id];
     for (let i = 0; i < 12; i++) {
+      const size = PHOTO_SIZES[index % PHOTO_SIZES.length];
       photos.push({
         id: gallery.id + "-" + (i + 1),
-        url: "https://picsum.photos/id/" + PICSUM_IDS[index % PICSUM_IDS.length] + "/" + PHOTO_SIZES[index % PHOTO_SIZES.length],
+        url: ph(titles[i], size[0], size[1]),
         title: titles[i],
         category: gallery.category,
         galleryId: gallery.id,
@@ -176,7 +170,20 @@ function buildSeedPhotos() {
 }
 
 // Isi LocalStorage jika masih kosong
+// Bump versi ini saat data seed berubah (mis. ganti gambar placeholder),
+// supaya data lama di LocalStorage ikut di-reset
+const SEED_VERSION = "chihiros-v1";
+
 function seedData() {
+  // Data lama (versi sebelumnya) di-replace sekali dengan seed terbaru
+  if (localStorage.getItem("zanstdo_seedVersion") !== SEED_VERSION) {
+    savePhotos(buildSeedPhotos());
+    saveGalleries(SEED_GALLERIES);
+    saveProducts(SEED_PRODUCTS);
+    localStorage.setItem("zanstdo_seedVersion", SEED_VERSION);
+    return;
+  }
+
   if (!getPhotos().length) {
     savePhotos(buildSeedPhotos());
   }
